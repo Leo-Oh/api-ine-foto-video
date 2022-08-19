@@ -21,10 +21,3 @@ Activate virtual environment
 **Run fast api**
 
     uvicorn main:app --reload
-
-![Fast api docs](vx_images/2417534269083.png "Fast api docs")
-
-
-![Fast api try it](vx_images/2349417826606.png "Fast api try it")
-
-![Fast api upload files](vx_images/3642927615698.png "Fast api upload files")
