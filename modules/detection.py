@@ -10,7 +10,7 @@ def compare_images(**kwargs):
     total=[]
     try:
         known_image=cv2.imread(kwargs['Know'])
-        known_image = cv2.resize(known_image, (640,480), interpolation = cv2.INTER_AREA)
+        known_image = cv2.rsouesize(known_image, (640,480), interpolation = cv2.INTER_AREA)
         gray = cv2.cvtColor(known_image, cv2.COLOR_BGR2GRAY)
         #face_cascade = cv2.CascadeClassifier(f'{ROOT_DIR}\\haarcascade_frontalface_default.xml')
         face_cascade = cv2.CascadeClassifier(os.getcwd()+"/haarcascade_frontalface_default.xml")

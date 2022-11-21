@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Form
 from fastapi.responses import FileResponse, JSONResponse
-from os import getcwd, remove
+from os import getcwd, remove, makedirs
 from shutil import rmtree
 import pathlib
 import uuid
@@ -15,6 +15,11 @@ async def upload_file(file_photo: UploadFile = File(...), file_ine: UploadFile =
     
     imagen=["jpg","jpeg","png","gif"]
     video=["avi","mp4","mkv"]
+    
+    makedirs('uploads', exist_ok=True)
+    makedirs('uploads/photo', exist_ok=True)
+    makedirs('uploads/ine', exist_ok=True)
+    makedirs('uploads/video', exist_ok=True)
     
     file_name_photo = pathlib.Path(file_photo.filename)
     file_name_ine = pathlib.Path(file_ine.filename)
