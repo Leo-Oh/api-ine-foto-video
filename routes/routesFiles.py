@@ -1,13 +1,24 @@
-from fastapi import APIRouter, UploadFile, File, Form
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi import APIRouter, UploadFile, File, Form, Request
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
 from os import getcwd, remove, makedirs
 from shutil import rmtree
 import pathlib
 import uuid
+from fastapi.templating import Jinja2Templates
+
+
 
 from modules.detection import compare_images
 
 router = APIRouter()
+
+templates = Jinja2Templates(directory="templates")
+
+@router.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+    })
 
 @router.post("/upload")
 async def upload_file(file_photo: UploadFile = File(...), file_ine: UploadFile = File(...),file_video: UploadFile = File(...)):

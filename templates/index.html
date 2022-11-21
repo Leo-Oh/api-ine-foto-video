@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> FastAPI</title>
+</head>
+<body>
+    <div class="container">
+
+
+        <label>Ine</label>
+    <br>
+    <input type="file" id="foto" name="foto" accept="image/*" />
+    <br>
+    <label>Foto</label>
+    <br>
+    <input type="file" id="ine" name="ine" accept="image/*" />
+    <br>
+    <label>Vide</label>
+    <br>
+    <input type="file" id="video" name="video" accept="video/*" />
+    <br>
+
+    <button onclick="sendData()"> Send </button>
+
+    <script>
+
+
+        const ine = document.getElementById('ine');
+        const foto = document.getElementById('foto');
+        const video = document.getElementById('video');
+
+        
+
+        const upload = (ine,foto,video) => {
+
+            console.log(ine);
+
+            if(ine != undefined || foto != undefined || video != undefined){
+                const formData = new FormData();
+
+                formData.append('file_ine', ine);
+                formData.append('file_photo', foto);
+                formData.append('file_video', video);
+    
+                fetch('http://127.0.0.1:8000/upload', { // Your POST endpoint
+                    method: 'POST',
+                    
+                    body: formData // This is your file object
+                }).then(
+                    response => response.json() // if the response is a JSON object
+                ).then(
+                    success => alert(success.detection) // Handle the success response object
+                ).catch(
+                    error => console.log(error) // Handle the error response object
+                );
+            }else{
+                alert("Es necesario llenar los 3 campos");
+            }
+           
+        };
+
+
+        const sendData = () => upload(ine.files[0], foto.files[0], video.files[0]);
+
+
+       
+
+    </script>
+    </div>
+</body>
+</html>
+
